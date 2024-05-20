@@ -3,7 +3,7 @@
 ## Description
 Official repository for the paper "Aligning object detector bounding boxes with human preference".
 
-![AP_vs_scaling_factor_vs_human_preference_with_images.png](figures%2FAP_vs_scaling_factor_vs_human_preference_with_images.png)
+![Figure1.jpg](figures%2FFigure1.jpg)
 
 *Previous work shows that humans tend to prefer large bounding boxes over small bounding boxes with the same
 IoU. However, we show here that commonly used object detectors predict large and small boxes equally often. In this
@@ -16,7 +16,6 @@ object detectors fine-tuned with the asymmetric loss are better aligned with hum
 fixed scaling factors. A qualitative evaluation shows that the human preference might be influenced by some object 
 characteristics, like object shape.*
 
-![asymmetric_loss_figures.png](figures%2Fasymmetric_loss_figures.png)
 ![asymmetric_loss_figures.jpg](figures%2Fasymmetric_loss_figures.jpg)
 
 ## Support
