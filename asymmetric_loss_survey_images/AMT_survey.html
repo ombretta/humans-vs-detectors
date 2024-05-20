@@ -1,0 +1,391 @@
+<!-- Main container -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" /><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+
+<crowd-form answer-format="flatten-objects">
+<div class="container">
+    <div id="content">
+
+        <h1 class="job-title">Comparing object detections</h1></br></br>
+
+        <p class="informed_consent">
+          The results of this study will be used for
+          research purposes and for the creation of research publications.
+          All responses are treated as confidential. Your participation in this research is voluntary and we
+          do not collect any personal information from the participants, therefore your contribution cannot
+          be withdrawn after the completion of this study.</br>
+          If you understand the statements above and freely consent to participate in the task,
+          please answer the following questions and press the 'Submit' button. If you do not wish to participate,
+          then please do not click on the 'Submit' button.</p>
+
+          <p class="instructions"></p>
+
+          <div class="column">
+                <td>
+                <label for="detection1" style="font-size: 16px;"><strong>Detection 1</strong></label> <br>
+                <input type="checkbox" class="radio" value="1" name="detection1"/>
+                <img src="${imageLink1}" alt="HTML5 Icon">
+                </td>
+
+          </div>
+          <div class="column">
+                <td>
+                <label for="detection2" style="font-size: 16px;"><strong>Detection 2</strong></label> <br>
+                <input type="checkbox" class="radio" value="2" name="detection2"/>
+                <img src="${imageLink2}" alt="HTML5 Icon">
+                </td>
+          </div>
+          <div class="column">
+                <td>
+                <label for="detection3" style="font-size: 16px;"><strong>Detection 3</strong></label> <br>
+                <input type="checkbox" class="radio" value="3" name="detection3"/>
+                <img src="${imageLink3}" alt="HTML5 Icon">
+                </td>
+          </div>
+          <div class="column">
+                <td>
+                <label for="detection4" style="font-size: 16px;"><strong>Detection 4</strong></label> <br>
+                <input type="checkbox" class="radio" value="4" name="detection4"/>
+                <img src="${imageLink4}" alt="HTML5 Icon">
+                </td>
+          </div>
+
+        <div id="footer">
+            <input class="btn btn-primary" id="submitButton" type="submit" value="Submit" />
+        </div>
+
+    </div>
+
+    <div class="events">
+        <input type="hidden" name="e_abort" value="0"/>
+        <input type="hidden" name="e_canplay" value="0"/>
+        <input type="hidden" name="e_canplaythrough" value="0"/>
+        <input type="hidden" name="e_durationchange" value="0"/>
+        <input type="hidden" name="e_emptied" value="0"/>
+        <input type="hidden" name="e_ended" value="0"/>
+        <input type="hidden" name="e_error" value="0"/>
+        <input type="hidden" name="e_loadeddata" value="0"/>
+        <input type="hidden" name="e_loadedmetadata" value="0"/>
+        <input type="hidden" name="e_loadstart" value="0"/>
+        <input type="hidden" name="e_pause" value="0"/>
+        <input type="hidden" name="e_play" value="0"/>
+        <input type="hidden" name="e_playing" value="0"/>
+        <input type="hidden" name="e_progress" value="0"/>
+        <input type="hidden" name="e_ratechange" value="0"/>
+        <input type="hidden" name="e_seeked" value="0"/>
+        <input type="hidden" name="e_seeking" value="0"/>
+        <input type="hidden" name="e_stalled" value="0"/>
+        <input type="hidden" name="e_suspend" value="0"/>
+        <input type="hidden" name="e_timeupdate" value="0"/>
+        <input type="hidden" name="e_volumechange" value="0"/>
+        <input type="hidden" name="e_waiting" value="0"/>
+      </div>
+
+        <input type="hidden" name="object_class" id="object_class" value="${objectClass}"/>
+        <input type="hidden" name="numberDetections" id="numberUniformSegments" value="3"/>
+        <input type="hidden" name="imageLink1" id="imageLink1" value="${imageLink1}"/>
+        <input type="hidden" name="imageLink2" id="imageLink2" value="${imageLink2}"/>
+        <input type="hidden" name="imageLink3" id="imageLink3" value="${imageLink3}"/>
+        <input type="hidden" name="imageLink4" id="imageLink4" value="${imageLink4}"/>
+        <input type="hidden" name="maxNumberChoices" id="maxNumberChoices" value="1"/>
+        <input type="hidden" name="chosenImage" id="chosenImage" value=""/>
+
+</div>
+</crowd-form>
+
+<script type="text/javascript">
+
+    var checked = 0;
+
+    $("#link1").html($("#imageLink1").val());
+    $("#link2").html($("#imageLink2").val());
+    $("#link3").html($("#imageLink3").val());
+    $('#submitButton').attr('disabled',true);
+
+    // function showObjectClass(idx, durationClass, label) {
+    //     durationClass.append("In this task, we ask you to analyze three object \
+    //     detections and choose the one that, in your opinion, best identifies \
+    //     the object <strong>\"" + label + "\"</strong>. You can choose only one \
+    //     detection.</br> Your input will be used to understand how to design \
+    //     object detectors that can satisfy the human preference.</br>");
+    // }
+
+    function showObjectClass(idx, durationClass, label) {
+        durationClass.append("Which green box do you think best identifies the \
+        object <strong>\"" + label + "\"</strong> shown in the image? \
+        You can choose only one detection.</br> Your input will be used to \
+        understand how to design object detectors that can satisfy the \
+        human preference.</br>");
+    }
+
+
+    showObjectClass("1", $(".instructions"), $("#object_class").val());
+
+    window.onload = function() {
+        document.getElementById('imageBox1').src = $("#imageLink1").val();
+        document.getElementById('imageBox2').src = $("#imageLink2").val();
+        document.getElementById('imageBox3').src = $("#imageLink3").val();
+        document.getElementById('imageBox4').src = $("#imageLink4").val();
+    };
+
+    // the selector will match all input controls of type :checkbox
+    // and attach a click event handler
+    $("input:checkbox").on('click', function() {
+      // in the handler, 'this' refers to the box clicked on
+      var $box = $(this);
+      if ($box.is(":checked")) {
+        // the name of the box is retrieved using the .attr() method
+        // as it is assumed and expected to be immutable
+
+        // the checked state of the group/box on the other hand will change
+        // and the current value is retrieved using .prop() method
+        $("input:checkbox").prop("checked", false);
+        $box.prop("checked", true);
+        checked = 1;
+      } else {
+        $box.prop("checked", false);
+        checked = 0;
+      }
+      update();
+    });
+
+    function update() {
+
+        if (checked == 1) {
+            $('#submitButton').attr('disabled',false);
+
+        }
+        else {
+            $('#submitButton').attr('disabled',true);
+        };
+    };
+
+</script>
+<style type="text/css">/* Layout  */
+
+/* Five image containers */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 4px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Center all columns */
+table td {
+    text-align: center;
+}
+
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.table-responsive tbody tr {
+  cursor: pointer;
+}
+.table-responsive .table thead tr th {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+.table-responsive .table tbody tr td {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+#otherDescription
+{
+  width: 600px;
+  padding: 17px;
+  margin: 10px;
+  border-radius: 0px;
+}
+
+label {
+    font: Arial;
+    display: inline-block;
+    white-space:nowrap;
+}
+
+input {
+    margin: .4rem;
+}
+
+.lastli
+{
+margin-bottom: 2px;
+}
+
+#breakdiv
+{
+height: 0px;
+}
+
+#footer > h2
+{
+    padding-top: 10px;
+}
+.container
+{
+    position: relative;
+}
+h2
+{
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+img
+{
+    max-width: 100%;
+}
+*{
+    box-sizing: border-box;
+    text-shadow: none;
+}
+
+#assignment-instructions{
+    display: none;
+}
+
+body>#content, #content{
+    margin: 0;
+    background-image:  linear-gradient(#EEF5F8 110px,#EEF5F8 110px,#FFFFFF 110px);
+    border: 0;
+    padding: 0;
+    margin-bottom: -155px;
+}
+
+/* Header  */
+
+h1.job-title{
+    margin: 0;
+    padding-left: 55px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-top: 37px;
+    margin-bottom: 10px;
+    background-color: #EEF5F8;
+    font-size: 23px;
+    color: #000;
+    min-height: 65px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAO3SURBVHgB7VtNbtNAGJ0j9AbkCL1BcwN6g+QG6Q3SG/gIPoJXJXUAWd0gwYJI7aILkMyCBSyQBQsWsBj8PCRxbM+MZ/yNPVP1SU/Qqhn7fX/zzU8Ye8ZIuOHnbMOXbMtXLOVrdsvjA/Ezfv+KX1Z/9ySw4fNSXFQyKwUW5b/ckLvq8xgnGGxL7+Gl7QSrmFeR4m10CG9nxKJlREQtmBfY8NmIwtuGwPMnFH/tINTNifcYWfiUXpfXiFGiAbnug9e7I6Eop9Er5gyYw30UPkpKYNAQxDsxQiied2IE0diEJbzOQf2CqPZ5MGK7o6Cwnx38m+psmbOEnxlpD67o6ZiW6xMD8TNv5/oh7L2qFGv0cIT1Z6YXLwpfSKKIo8Bz788/cJ584zz7wfnVo9UYWbDeh/gm4q+UUYA9OY8E1zm74zz/zTvx4s54vEgW/vmUIlVMvnMpLt4bR0DR7gtu/G15rz/LxSMqrMZtpYGn4Y/QV+Hyo/XYUTP8kykEqnj2Rp73wPrTgPHTcsv9BB52fqjw5KFf56EOZOV/Bg6GUIXHqMRjjpeh+CueN/g5hzMGsadvLRxNyR7w2lBDYEyIlGFxT2Pk415BWp7HWQ6y+9V+QavmpEZV3kc5kXjB1T4CrLa8zt7KX9SyTdVOeZRpVh3I/o+ANbUBALSuJuMtH9TjkeT9KeNBBgCjL2qP9X1pVasLDJryXBoAUdBVB/ZAgewzTr2QNjG0pigYDaoBde+pqjaiRPV5Xd47CH3BQw0g2PdHS6rC4qH7c+fv1J8zXuiYcUW6EEKeylD8aXtyorw/8jV/SdYJ7qnK5eY0pmp1dz8diwdPbpsQ7QWgKKq8iu0s/J2q1XWa93U2VoMx1cDIa11RVIGs1VUzc7ofoPKwCsStroqN/QAHG6I6TzdBssTtyy2/YC0QnwXqmqQ6yJa4/ZizTgzoCGXUNUl7rB5pn6th3G0ATIcOdoa69vPrcNjqdlN5XJ5WV1vJHyprksiXuHpqzgcdng419/ZHznvBzuI3UhSAy3vRLSLs0S+MKl6a+yPVgslpdFUGFw5DEqfjYelrgtS/wxJL5swKYpWYByS0W/ygO8Sh3xfqVfX1RpizW84D5IqRIbTrslZFTwdcmw0hHZx+ncbv67M5Tc73M0LsmfgJvj8k6kI+qXCRkoTFztwIU0ZDPO23xuoY1xDJOLluAxgCqZFWX3ulFJ1XU5vxtfcpcTRGwkxrBXI7rTy9qqbfJwF4D6GLIynM1fDokYuKEDuyl/8B4+Y5RBFcp+4AAAAASUVORK5CYII=');
+    background-position: 10px 33px;
+    background-size: 32px;
+    background-repeat: no-repeat;
+}
+/* logo */
+
+p.informed_consent{
+    margin: 0;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    background-color: #EEF5F8;
+    font-size: 14px;
+    min-height: 16px;
+    background-position: 10px 33px;
+    background-size: 32px;
+    background-repeat: no-repeat;
+}
+
+#content::after{
+    position: absolute;
+    top: 0px;
+    right: 40px;
+    z-index: 99;
+    content: " ";
+    display: block;
+    width: 186px;
+    height: 104px;
+    background-size: 186px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    #content, body>#content{
+        padding-top: 60px;
+    }
+
+    #content::after{
+        width: 50%;
+        background-size: 100%;
+    }
+}
+
+/* Numbered list */
+
+ol{
+    position: relative;
+    counter-reset: item;
+    list-style-position: inside;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px dotted #00B8FF;
+    margin-left: 25px;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+
+ol>li{
+    padding-left: 30px;
+    z-index: 1;
+}
+
+ol>li::before{
+    font-size: 13px;
+    font-weight: bold;
+    content: counter(item);
+    counter-increment: item;
+    position: absolute;
+    left: -11px;
+    background-color: #00B9FF;
+    width: 20px;
+    height: 20px;
+    line-height: 19px;
+    border-radius: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+
+/* Additional comments list */
+
+ol>li>ul{
+    margin-bottom: 5px;
+}
+
+
+.submit.btn.btn-warning{
+    /* Readable text on warning buttons  */
+    color: #000;
+    font-weight: bold;
+}
+
+.submit.btn{
+    border-radius: 0;
+    padding: 15px 30px;
+}
+
+
+/* Footer */
+#footer{
+    background: #EEF5F8;
+    padding-bottom: 10px;
+
+}
+</style>

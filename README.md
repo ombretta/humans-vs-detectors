@@ -18,6 +18,17 @@ characteristics, like object shape.*
 
 ![asymmetric_loss_figures.jpg](figures%2Fasymmetric_loss_figures.jpg)
 
+## Requirements 
+
+- Object detectors implementation: [Meta Detectron2](https://github.com/facebookresearch/detectron2).
+- MS COCO dataset: pycocotools.
+
+## Survey images
+
+The survey images can be found on Google Drive. 
+- Comparing object detections scaled with fixed factors: [link](https://drive.google.com/drive/folders/1Y2FVuTRDX1oNAcftV2H_tcKOjGt-tSXK?usp=share_link) 
+- Comparing asymmetric loss and fixed scaling factors: [link](https://drive.google.com/drive/folders/11P8MmKYg6WpeQF3FjnFR05tcY2J_QvtA?usp=share_link)
+
 ## Support
 For technical questions and support: [o.strafforello@tudelft.nl](mailto:o.strafforello@tudelft.nl).
 
