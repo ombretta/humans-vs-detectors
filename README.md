@@ -17,6 +17,7 @@ fixed scaling factors. A qualitative evaluation shows that the human preference 
 characteristics, like object shape.*
 
 ![asymmetric_loss_figures.png](figures%2Fasymmetric_loss_figures.png)
+![asymmetric_loss_figures.jpg](figures%2Fasymmetric_loss_figures.jpg)
 
 ## Support
 For technical questions and support: [o.strafforello@tudelft.nl](mailto:o.strafforello@tudelft.nl).
